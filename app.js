@@ -5,12 +5,12 @@ const Strategy = require("passport-oauth2").Strategy;
 passport.use(
   new Strategy(
     {
-      authorizationURL: "http://localhost:3000/login/google",
-      tokenURL: "http://localhost:3000/token",
+      authorizationURL: "https://node-google-login.herokuapp.com/login/google",
+      tokenURL: "https://node-google-login.herokuapp.com/token",
       clientID:
-        "259500391656-f25oklov98gev319ire9c9cgbc95l8ph.apps.googleusercontent.com",
-      clientSecret: "U0SI5EaCT88JZIPinrVV9Vdy",
-      callbackURL: "http://localhost:3000/login/google/callback"
+        "259500391656-idvrhev60vk0mdefmbt8aogtec2m6pbt.apps.googleusercontent.com ",
+      clientSecret: "EKatxsuPeIUbHJgeNvfF1JJN",
+      callbackURL: "https://node-google-login.herokuapp.com/login/google/callback"
     },
     (accessToken, refreshToken, profile, cb) => {
       User.findOrCreate({ exampleId: profile.id }, (err, user) => {
