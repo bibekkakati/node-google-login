@@ -5,8 +5,8 @@ const Strategy = require("passport-oauth2").Strategy;
 passport.use(
   new Strategy(
     {
-      authorizationURL: "https://node-google-login.herokuapp.com/login/google",
-      tokenURL: "https://node-google-login.herokuapp.com/token",
+      authorizationURL: "https://accounts.google.com/o/oauth2/auth",
+      tokenURL: "https://accounts.google.com/o/oauth2/auth/token",
       clientID:
         "259500391656-sumvvuo076tdmltcf6vgfprbui4avkd4.apps.googleusercontent.com",
       clientSecret: "XBaSp9-hHliEO6Bu44v9ZDSC",
