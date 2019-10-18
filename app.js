@@ -83,7 +83,7 @@ app.get("/login/google", passport.authenticate("oauth2"));
 //@access - PUBLIC
 app.get(
   "/login/google/callback",
-  passport.authenticate("oauth2", { failureRedirect: "/login" }),
+  passport.authenticate("oauth2", { successRedirect:"/home", failureRedirect: "/login" }),
   (req, res) => {
     console.log("/login/google/callback--------------" + req);
     // Successful authentication, redirect home.
