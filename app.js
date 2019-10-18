@@ -11,7 +11,7 @@ passport.use(
         "259500391656-sumvvuo076tdmltcf6vgfprbui4avkd4.apps.googleusercontent.com",
       clientSecret: "XBaSp9-hHliEO6Bu44v9ZDSC",
       callbackURL: "https://node-google-login.herokuapp.com/login/google/callback",
-      scope: "https://www.googleapis.com/auth/admin.directory.customer.readonly"
+      scope: "https://www.googleapis.com/auth/userinfo.profile"
     },
     (accessToken, refreshToken, profile, cb) => {
       User.findOrCreate({ exampleId: profile.id }, (err, user) => {
