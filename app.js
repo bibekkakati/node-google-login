@@ -8,8 +8,8 @@ passport.use(
       authorizationURL: "https://node-google-login.herokuapp.com/login/google",
       tokenURL: "https://node-google-login.herokuapp.com/token",
       clientID:
-        "259500391656-idvrhev60vk0mdefmbt8aogtec2m6pbt.apps.googleusercontent.com ",
-      clientSecret: "EKatxsuPeIUbHJgeNvfF1JJN",
+        "259500391656-sumvvuo076tdmltcf6vgfprbui4avkd4.apps.googleusercontent.com",
+      clientSecret: "XBaSp9-hHliEO6Bu44v9ZDSC",
       callbackURL: "https://node-google-login.herokuapp.com/login/google/callback"
     },
     (accessToken, refreshToken, profile, cb) => {
