@@ -1,20 +1,18 @@
 const express = require("express");
 const passport = require("passport");
-const Strategy = require("passport-oauth2").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 passport.use(
-  new Strategy(
+  new GoogleStrategy(
     {
-      authorizationURL: "https://accounts.google.com/o/oauth2/auth",
-      tokenURL: "https://accounts.google.com/o/oauth2/auth/token",
       clientID:
         "259500391656-sumvvuo076tdmltcf6vgfprbui4avkd4.apps.googleusercontent.com",
       clientSecret: "XBaSp9-hHliEO6Bu44v9ZDSC",
-      callbackURL: "https://node-google-login.herokuapp.com/login/google/callback",
-      scope: "https://www.googleapis.com/auth/cloud-platform"
+      callbackURL:
+        "https://node-google-login.herokuapp.com/login/google/callback"
     },
     (accessToken, refreshToken, profile, cb) => {
-      User.findOrCreate({ exampleId: profile.id }, (err, user) => {
+      User.findOrCreate({ googleId: profile.id }, (err, user) => {
         return cb(err, user);
       });
     }
@@ -55,7 +53,6 @@ app.use(passport.session());
 //@desc   - a route to home page
 //@access - PUBLIC
 app.get("/", (req, res) => {
-  console.log("/home------------------" + req);
   res.render("home", { user: req.user });
 });
 
@@ -76,16 +73,18 @@ app.get("/login", (req, res) => {
 //@route  - GET  /login/google
 //@desc   - a route to google auth
 //@access - PUBLIC
-app.get("/login/google", passport.authenticate("oauth2"));
+app.get(
+  "/login/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
 
 //@route  - GET  /login/google/callback
 //@desc   - a route after successful google auth
 //@access - PUBLIC
 app.get(
   "/login/google/callback",
-  passport.authenticate("oauth2", { successRedirect:"/home", failureRedirect: "/login" }),
+  passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    console.log("/login/google/callback--------------" + req);
     // Successful authentication, redirect home.
     res.redirect("/");
   }
@@ -98,7 +97,6 @@ app.get(
   "/profile",
   require("connect-ensure-login").ensureLoggedIn(),
   (req, res) => {
-    console.log("/profile--------------" + req);
     res.render("profile", { user: req.user });
   }
 );
